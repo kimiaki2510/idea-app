@@ -6,13 +6,12 @@ class IdeasController < ApplicationController
 
   def show; end
 
-  def create
-    # @category = Category.find(category_id: @category.name)
+  def create    
     @idea = Idea.new(idea_params)
     if @idea.save
-      render json: { data: @idea }
+      render json: { status: 201, data: @idea }
     else
-      render json: { data: @idea.errors }
+      render json: { status: 422, data: @idea.errors }
     end
   end
 
