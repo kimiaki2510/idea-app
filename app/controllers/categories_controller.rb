@@ -9,9 +9,9 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      render json: {data: @category}
+      render json: { data: @category }
     else
-      render json: {data: @category.errors}
+      render json: { data: @category.errors }
     end
   end
 

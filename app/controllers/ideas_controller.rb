@@ -1,18 +1,18 @@
 class IdeasController < ApplicationController
   def index
     @ideas = Idea.all
-    render json: {data: @idea}
+    render json: { data: @idea }
   end
 
   def show; end
 
   def create
-    #@category = Category.find(category_id: @category.name)
+    # @category = Category.find(category_id: @category.name)
     @idea = Idea.new(idea_params)
     if @idea.save
-      render json: {data: @idea}
+      render json: { data: @idea }
     else
-      render json: {data: @idea.errors}
+      render json: { data: @idea.errors }
     end
   end
 
