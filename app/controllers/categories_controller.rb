@@ -1,17 +1,17 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:index, :show]
   def index
-    render json: {data: categories}
+    @categories = Category.all
+    render json: @categories
   end
 
   def show; end
 
   def create
-    category = Category.new(category_params)
-    if category.save
-      render json: {data: category}
+    @category = Category.new(category_params)
+    if @category.save
+      render json: {data: @category}
     else
-      render json: {data: category.errors}
+      render json: {data: @category.errors}
     end
   end
 

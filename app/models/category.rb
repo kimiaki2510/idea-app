@@ -1,3 +1,4 @@
 class Category < ApplicationRecord
-  belongs_to :idea
+  has_many :ideas
+  #belongs_to :idea
 end
