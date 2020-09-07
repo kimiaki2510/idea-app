@@ -10,8 +10,7 @@ RSpec.describe Idea, type: :model do
   end
 
   it 'bodyが空白は無効' do
-    @idea.body = " "
+    @idea.body = ' '
     expect(@idea).to be_valid
   end
-
 end

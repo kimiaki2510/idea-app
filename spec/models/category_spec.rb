@@ -6,7 +6,7 @@ RSpec.describe Category, type: :model do
   end
 
   it 'nameが空白は無効' do
-    @category.name = " "
+    @category.name = ' '
     expect(@category).to be_invalid
   end
 end
