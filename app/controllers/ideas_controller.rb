@@ -1,17 +1,22 @@
 class IdeasController < ApplicationController
   def index
-    @ideas = Idea.all
-    render json: { data: @idea }
+    if params[:category].present?
+      @ideas = Idea.where('category LIKE ?', "%#{params[:category]}%")
+      render json: @ideas
+    else
+      @ideas = Idea.all
+      render json: @ideas
+    end
   end
 
   def show; end
 
-  def create    
+  def create
     @idea = Idea.new(idea_params)
     if @idea.save
-      render json: { status: 201, data: @idea }
+      render json: { data: @idea }
     else
-      render json: { status: 422, data: @idea.errors }
+      render json: { data: @idea.errors }
     end
   end
 

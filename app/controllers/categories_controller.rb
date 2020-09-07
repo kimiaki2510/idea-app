@@ -1,7 +1,12 @@
 class CategoriesController < ApplicationController
   def index
-    @categories = Category.all
-    render json: @categories
+    if params[:name].present?
+      @categories = Category.where('name LIKE ?', "%#{params[:name]}%")
+      render json: @categories
+    else
+      @categories = Category.all
+      render json: @categories
+    end
   end
 
   def show; end
