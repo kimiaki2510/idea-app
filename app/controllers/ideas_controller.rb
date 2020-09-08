@@ -25,6 +25,8 @@ class IdeasController < ApplicationController
       render json: @ideas
     else
       @ideas = Idea.all
+      @category = Idea.category.all
+      #@ideas = Idea.includes(:categories)where(category: {name: params[:category]})
       render json: @ideas
     end
   end
@@ -43,6 +45,6 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-    params.require(:idea).permit(:body, :category_id)
+    params.require(:idea).permit({category: []} ,:body)
   end
 end

@@ -1,3 +1,3 @@
 class Idea < ApplicationRecord
-  has_many :categories
+  belongs_to :category
 end
