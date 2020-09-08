@@ -20,13 +20,12 @@ class IdeasController < ApplicationController
     ##################################################
 
   def index
-    if params[:category].present?
-      @ideas = Idea.where('category LIKE ?', "%#{params[:category]}%")
+    if params[:category_id].present?
+      @ideas = Idea.where('category_id LIKE ?', "%#{params[:category_id]}%")
       render json: @ideas
     else
-      @ideas = Idea.all
-      @category = Idea.category.all
-      #@ideas = Idea.includes(:categories)where(category: {name: params[:category]})
+      #@ideas = Idea.all
+      @ideas = Idea.includes(:category)      
       render json: @ideas
     end
   end
