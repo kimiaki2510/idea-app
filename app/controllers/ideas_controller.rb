@@ -20,20 +20,34 @@ class IdeasController < ApplicationController
     ##################################################
 
   def index
-    if params[:category_id].present?
-      @ideas = Idea.where('category_id LIKE ?', "%#{params[:category_id]}%")
-      render json: @ideas
-    else
-      #@idea = Idea.all
-      #@ideas = Category.all
-      @search = IdeaSearch.new(params[:search])
-      @ideas = @search.search
-      #@ideas = Idea.includes(:category).where(category: {name: params[:category]})
-      render json: @ideas
+    #if params[:category_id].present?
+      #@ideas = Idea.where('category_id LIKE ?', "%#{params[:category_id]}%")
+      #render json: @ideas
+    #else
+      #@ideas = Idea.all
+      #render json: @ideas
+    #end
+    #@ideas = Idea.all
+
+    #@ideas = Idea.joins(:category).where('name = ?', "%#{params[:category]}%")
+    #render json: @ideas
+
+    @search = IdeaSearch.new
+    @ideas = Idea.all
+    render json: @ideas
+  end
+
+  def search #http://famtom.hatenablog.com/entry/2013/10/27/091036
+    @search = IdeaSearch.new(idea_params)
+    unless @ideas = @search.search
+      @ideas =Idea.all
     end
+    render json: @ideas
   end
 
   def show; end
+
+  def new; end
 
   def create
     @idea = Idea.new(idea_params)

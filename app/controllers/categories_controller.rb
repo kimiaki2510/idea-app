@@ -11,6 +11,8 @@ class CategoriesController < ApplicationController
 
   def show; end
 
+  def new; end
+  
   def create
     @category = Category.new(category_params)
     if @category.save
