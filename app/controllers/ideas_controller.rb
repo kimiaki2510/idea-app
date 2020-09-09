@@ -24,8 +24,9 @@ class IdeasController < ApplicationController
       @ideas = Idea.where('category_id LIKE ?', "%#{params[:category_id]}%")
       render json: @ideas
     else
-      #@ideas = Idea.all
-      @ideas = Idea.includes(:category)      
+      @idea = Idea.all
+      @ideas = Category.all
+      #@ideas = Idea.includes(:category).where(category: {name: params[:category]})
       render json: @ideas
     end
   end
